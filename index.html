@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Sorpresa Para Ti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c0a18; /* Fondo oscuro base */
+            color: #F3F4F6;
+            overflow: hidden; /* Evita el scroll por las animaciones */
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .card {
+            background-color: rgba(17, 24, 39, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; /* Para que el contenido esté sobre el fondo animado */
+            z-index: 10;
+        }
+
+        /* --- Animación del Universo --- */
+        @keyframes move-twink-back {
+            from {background-position:0 0;}
+            to {background-position:-10000px 5000px;}
+        }
+
+        .stars, .twinkling {
+            position:absolute;
+            top:0;
+            left:0;
+            right:0;
+            bottom:0;
+            width:100%;
+            height:100%;
+            display:block;
+        }
+
+        .stars {
+            background:#0c0a18 url(https://www.transparenttextures.com/patterns/stardust.png) repeat top center;
+            z-index:0;
+        }
+
+        .twinkling {
+            background:transparent url(https://www.transparenttextures.com/patterns/twinkles.png) repeat top center;
+            z-index:1;
+            animation:move-twink-back 200s linear infinite;
+        }
+
+        /* --- Animación de Estrellas Fugaces --- */
+        .shooting-star {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(-45deg, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.7));
+            animation: shooting-star-animation 3s linear infinite;
+        }
+
+        @keyframes shooting-star-animation {
+            0% {
+                transform: translateX(0) translateY(0) rotate(-45deg);
+                opacity: 1;
+                width: 0;
+            }
+            70% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateX(-100vw) translateY(100vh) rotate(-45deg);
+                opacity: 0;
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen p-4">
+
+    <!-- Capas de la animación del universo -->
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <!-- Contenedor para las estrellas fugaces -->
+    <div id="shooting-stars-container" class="absolute top-0 left-0 w-full h-full overflow-hidden z-[5]"></div>
+
+
+    <main class="w-full max-w-2xl mx-auto text-center">
+        
+        <div class="card p-8 sm:p-12 rounded-2xl shadow-2xl">
+            <h1 class="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">¡Feliz Cumpleaños a mi persona favorita!</h1>
+            
+            <p class="text-lg text-gray-300 mb-4">
+                Dicen que hay días que lo cambian todo. Para mí, sin duda, fue un <strong>10 de agosto</strong>.
+            </p>
+            <p class="text-lg text-gray-300 mb-8">
+                El día que llegaste tú y, sin que te dieras cuenta, lo hiciste todo mucho mejor.
+            </p>
+
+            <p class="text-xl text-white font-semibold mb-10">
+                Tengo una sorpresita para ti...
+            </p>
+
+            <!-- Este botón llevará a la página con el poema y los videos. -->
+            <!-- Deberás crear un archivo llamado "sorpresa.html" con el otro código. -->
+            <a href="historia.html" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-10 rounded-full shadow-lg transform hover:scale-105 transition-transform duration-300 inline-block">
+                ¡Quiero verla!
+            </a>
+        </div>
+
+    </main>
+    
+    <script>
+        // --- Creación dinámica de estrellas fugaces ---
+        const container = document.getElementById('shooting-stars-container');
+        const numberOfStars = 5; // Puedes ajustar este número
+
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'shooting-star';
+            
+            // Posición inicial aleatoria en la parte superior y derecha de la pantalla
+            star.style.top = `${Math.random() * 50 - 25}vh`; // -25vh a 25vh
+            star.style.left = `${Math.random() * 100 + 100}vw`; // 100vw a 200vw (fuera de la pantalla a la derecha)
+            
+            // Retraso de animación aleatorio para que no aparezcan todas a la vez
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            // Duración aleatoria para distintas velocidades
+            star.style.animationDuration = `${Math.random() * 2 + 3}s`; // Entre 3 y 5 segundos
+
+            container.appendChild(star);
+        }
+    </script>
+
+</body>
+</html>
